@@ -1,12 +1,12 @@
 
 public class Weapon {
 	
-	private int AttackBonus;
-	private int DamageBonus;
+	private int attackBonus;
+	private int damageBonus;
 
-	public Weapon(int attackBonus, int damageBonus) {
-		AttackBonus = attackBonus;
-		DamageBonus = damageBonus;
+	public Weapon(int startAttackBonus, int startDamageBonus) {
+		attackBonus = startAttackBonus;
+		damageBonus = startDamageBonus;
 	}
 	
 	public static void main(String[] args) {

@@ -1,12 +1,16 @@
 
 public class Monster {
 	
-	private int Health;
-	private int Attack;
-	private int Defense;
-	private int Damage;
-	private int HasPotionProbability;
-	private int HasGoldProbability;
+	private int health;
+	private int attack;
+	private int defense;
+	private int damage;
+	private int hasPotionProbability;
+	private int hasGoldProbability;
+	
+	public Monster() {
+		health = 100;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
