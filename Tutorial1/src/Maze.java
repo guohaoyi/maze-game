@@ -34,7 +34,7 @@ public class Maze {
 		}
 	}
 	
-	public static void realMaze()
+	public void realMaze()
 	{
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
@@ -75,11 +75,7 @@ public class Maze {
 		// TODO Auto-generated method stub
 		Maze maz = new Maze("map01.txt");
 		System.out.println(maz);
-		realMaze();
-		String cla = realMaze[1][1].getClass().getName();
-		System.out.println(cla);
-		System.out.println(cla.equals("Empty"));
-		System.out.println((Empty)realMaze[1][2]);
+		maz.realMaze();
 	}
 
 }

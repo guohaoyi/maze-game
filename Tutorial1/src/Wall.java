@@ -6,6 +6,10 @@ public class Wall {
 	public Wall() {
 		visible = false;
 	}
+	
+	public void setVisible() {
+		visible = true;
+	}
 
 	public String toString() {
 		return "W";
