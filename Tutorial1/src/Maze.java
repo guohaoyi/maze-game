@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Maze {
 	
 	private static char[][] map = new char[40][40];
-	private static Object[][] realMaze = new Object[40][40];
-	private static int row, col;
+	public static Object[][] realMaze = new Object[40][40];
+	public static int row, col, playerRow, playerCol;
 	
 	public Maze(String fileName) {
 		try
@@ -45,7 +45,7 @@ public class Maze {
 				else if (map[i][j] == 'U')
 					realMaze[i][j] = new Player(100,5,2,0);
 				else
-					realMaze[i][j] = null;
+					realMaze[i][j] = new Empty();
 			}
 		}
 	}
@@ -76,7 +76,10 @@ public class Maze {
 		Maze maz = new Maze("map01.txt");
 		System.out.println(maz);
 		realMaze();
-		System.out.println(realMaze[1][10].getClass().getName());
+		String cla = realMaze[1][1].getClass().getName();
+		System.out.println(cla);
+		System.out.println(cla.equals("Empty"));
+		System.out.println((Empty)realMaze[1][2]);
 	}
 
 }
