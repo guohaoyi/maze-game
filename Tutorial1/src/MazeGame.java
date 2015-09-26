@@ -19,11 +19,29 @@ public class MazeGame {
 		Empty em = new Empty();
 		if (map.realMaze[row][col].getClass().getName().equals("Empty"))
 			return true;
-		else
-		{
+		else {
 			System.out.println("Invalid move");
 			return false;
 		}
+	}
+	
+	public static void setVisible() {
+		if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Wall"))
+			((Wall)map.realMaze[playerRow + 1][playerCol]).setVisible(true);
+		else if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Monster"))
+			((Monster)map.realMaze[playerRow + 1][playerCol]).setVisible(true);
+		if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Wall"))
+			((Wall)map.realMaze[playerRow - 1][playerCol]).setVisible(true);
+		else if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Monster"))
+			((Monster)map.realMaze[playerRow - 1][playerCol]).setVisible(true);
+		if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Wall"))
+			((Wall)map.realMaze[playerRow][playerCol + 1]).setVisible(true);
+		else if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Monster"))
+			((Monster)map.realMaze[playerRow][playerCol + 1]).setVisible(true);
+		if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Wall"))
+			((Wall)map.realMaze[playerRow][playerCol - 1]).setVisible(true);
+		else if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Monster"))
+			((Monster)map.realMaze[playerRow][playerCol - 1]).setVisible(true);
 	}
 	
 	public static void move(char ch) {
@@ -32,6 +50,7 @@ public class MazeGame {
 				map.realMaze[playerRow - 1][playerCol] = p;
 				map.realMaze[playerRow][playerCol] = new Empty();
 				playerRow--;
+				
 			}
 		}
 		else if (ch == 's') {
@@ -79,10 +98,12 @@ public class MazeGame {
 		p = (Player)map.realMaze[playerRow][playerCol];
 		System.out.println("You wake up in a cold, damp, dark area. You're lying on the ground in a pool of blood\nand vomit. It appears to be your own. Wow! What a wild night last night was. You\nremember so little, but your head pounds and you wish you were home in bed (or even\nin Dave's CSC 300 class - anywhere but here). Oh well. You stagger to your feet and\nbump up against a slimy wall. Ewwwwww! Well, time to get out of here. You notice\nyour pockets are empty. Even your trusty dagger is gone. This so sucks. Well, you're\nnot getting home by standing here... Get moving!");
 		map.printRealMaze();
+		setVisible();
+		map.printVisible();
 		while (!game)
 		{
 			getMove();
-			map.printRealMaze();
+			map.printVisible();
 			checkGame();
 		}
 		System.out.println("Game!");

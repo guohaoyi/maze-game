@@ -1,12 +1,16 @@
 
 public class Empty {
 	
-	boolean visible;
+	private boolean visible;
 	
 	public Empty() {
 		visible = true;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+
 	public String toString() {
 		return " ";
 	}

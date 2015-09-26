@@ -1,14 +1,18 @@
 
 public class Wall {
 	
-	boolean visible;
+	private static boolean visible;
 	
 	public Wall() {
-		visible = false;
+		setVisible(false);
 	}
-	
-	public void setVisible() {
-		visible = true;
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public static void setVisible(boolean newVisible) {
+		visible = newVisible;
 	}
 
 	public String toString() {

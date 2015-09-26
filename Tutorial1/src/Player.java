@@ -14,6 +14,10 @@ public class Player extends Character {
 		visible = true;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+
 	public String toString() {
 		return "U";
 	}
