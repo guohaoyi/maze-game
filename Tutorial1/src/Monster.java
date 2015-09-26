@@ -3,7 +3,7 @@ public class Monster extends Character {
 	
 	private double hasPotionProbability;
 	private double hasGoldProbability;
-	private static boolean visible;
+	private boolean visible;
 	
 	public Monster(int startHealth, int startAttack, int startDefense, int startDamage) {
 		super(startHealth, startAttack, startDefense, startDamage);
