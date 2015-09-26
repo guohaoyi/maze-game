@@ -16,7 +16,7 @@ public class Monster extends Character {
 		return visible;
 	}
 
-	public static void setVisible(boolean newVisible) {
+	public void setVisible(boolean newVisible) {
 		visible = newVisible;
 	}
 

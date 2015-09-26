@@ -26,22 +26,38 @@ public class MazeGame {
 	}
 	
 	public static void setVisible() {
-		if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Wall"))
-			((Wall)map.realMaze[playerRow + 1][playerCol]).setVisible(true);
-		else if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Monster"))
-			((Monster)map.realMaze[playerRow + 1][playerCol]).setVisible(true);
-		if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Wall"))
-			((Wall)map.realMaze[playerRow - 1][playerCol]).setVisible(true);
-		else if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Monster"))
-			((Monster)map.realMaze[playerRow - 1][playerCol]).setVisible(true);
-		if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Wall"))
-			((Wall)map.realMaze[playerRow][playerCol + 1]).setVisible(true);
-		else if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Monster"))
-			((Monster)map.realMaze[playerRow][playerCol + 1]).setVisible(true);
-		if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Wall"))
-			((Wall)map.realMaze[playerRow][playerCol - 1]).setVisible(true);
-		else if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Monster"))
-			((Monster)map.realMaze[playerRow][playerCol - 1]).setVisible(true);
+		if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Wall")) {
+			Wall w1 = (Wall)map.realMaze[playerRow + 1][playerCol];
+			w1.setVisible(true);
+		}
+		else if (map.realMaze[playerRow + 1][playerCol].getClass().getName().equals("Monster")) {
+			Monster m1 = (Monster)map.realMaze[playerRow + 1][playerCol];
+			m1.setVisible(true);
+		}
+		if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Wall")) {
+			Wall w1 = (Wall)map.realMaze[playerRow - 1][playerCol];
+			w1.setVisible(true);
+		}
+		else if (map.realMaze[playerRow - 1][playerCol].getClass().getName().equals("Monster")) {
+			Monster m1 = (Monster)map.realMaze[playerRow - 1][playerCol];
+			m1.setVisible(true);
+		}
+		if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Wall")) {
+			Wall w1 = (Wall)map.realMaze[playerRow][playerCol + 1];
+			w1.setVisible(true);
+		}
+		else if (map.realMaze[playerRow][playerCol + 1].getClass().getName().equals("Monster")) {
+			Monster m1 = (Monster)map.realMaze[playerRow][playerCol + 1];
+			m1.setVisible(true);
+		}
+		if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Wall")) {
+			Wall w1 = (Wall)map.realMaze[playerRow][playerCol - 1];
+			w1.setVisible(true);
+		}
+		else if (map.realMaze[playerRow][playerCol - 1].getClass().getName().equals("Monster")) {
+			Monster m1 = (Monster)map.realMaze[playerRow][playerCol - 1];
+			m1.setVisible(true);
+		}
 	}
 	
 	public static void move(char ch) {
@@ -50,7 +66,7 @@ public class MazeGame {
 				map.realMaze[playerRow - 1][playerCol] = p;
 				map.realMaze[playerRow][playerCol] = new Empty();
 				playerRow--;
-				
+				setVisible();
 			}
 		}
 		else if (ch == 's') {
@@ -58,6 +74,7 @@ public class MazeGame {
 				map.realMaze[playerRow + 1][playerCol] = p;
 				map.realMaze[playerRow][playerCol] = new Empty();
 				playerRow++;
+				setVisible();
 			}
 		}
 		else if (ch == 'e') {
@@ -65,6 +82,7 @@ public class MazeGame {
 				map.realMaze[playerRow][playerCol + 1] = p;
 				map.realMaze[playerRow][playerCol] = new Empty();
 				playerCol++;
+				setVisible();
 			}
 		}
 		else if (ch == 'w') {
@@ -72,6 +90,7 @@ public class MazeGame {
 				map.realMaze[playerRow][playerCol - 1] = p;
 				map.realMaze[playerRow][playerCol] = new Empty();
 				playerCol--;
+				setVisible();
 			}
 		}
 		else

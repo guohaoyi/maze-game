@@ -11,7 +11,7 @@ public class Wall {
 		return visible;
 	}
 
-	public static void setVisible(boolean newVisible) {
+	public void setVisible(boolean newVisible) {
 		visible = newVisible;
 	}
 
