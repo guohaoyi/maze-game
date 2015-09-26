@@ -43,7 +43,11 @@ public class Maze {
 				else if (map[i][j] == 'G')
 					realMaze[i][j] = new Monster(100,4,2,0);
 				else if (map[i][j] == 'U')
+				{
 					realMaze[i][j] = new Player(100,5,2,0);
+					playerRow = i;
+					playerCol = j;
+				}
 				else
 					realMaze[i][j] = new Empty();
 			}
@@ -70,12 +74,22 @@ public class Maze {
 			System.out.println();
 		}
 	}
+	
+	public void printRealMaze() {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				System.out.print(realMaze[i][j]);
+			}
+			System.out.println();
+		}
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Maze maz = new Maze("map01.txt");
 		System.out.println(maz);
 		maz.realMaze();
+		System.out.println(playerCol);
+		maz.printRealMaze();
 	}
 
 }
