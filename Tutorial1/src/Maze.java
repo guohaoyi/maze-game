@@ -110,7 +110,6 @@ public class Maze {
 
 	public static void main(String[] args) {
 		Maze maz = new Maze("map01.txt");
-		//System.out.println(maz);
 		maz.realMaze();
 		maz.printRealMaze();
 		maz.printVisible();
