@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Maze {
 	
 	private static char[][] map = new char[40][40];
+	private static Object[][] realMaze = new Object[40][40];
 	private static int row, col;
 	
 	public Maze(String fileName) {
@@ -33,6 +34,22 @@ public class Maze {
 		}
 	}
 	
+	public static void realMaze()
+	{
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (map[i][j] == 'W')
+					realMaze[i][j] = new Wall();
+				else if (map[i][j] == 'G')
+					realMaze[i][j] = new Monster(100,4,2,0);
+				else if (map[i][j] == 'U')
+					realMaze[i][j] = new Player(100,5,2,0);
+				else
+					realMaze[i][j] = null;
+			}
+		}
+	}
+	
 	public String toString() {
 		String str = "";
 		for (int i = 0; i < row; i++) {
@@ -58,8 +75,8 @@ public class Maze {
 		// TODO Auto-generated method stub
 		Maze maz = new Maze("map01.txt");
 		System.out.println(maz);
-		//maz.printMaze();
-
+		realMaze();
+		System.out.println(realMaze[1][10].getClass().getName());
 	}
 
 }

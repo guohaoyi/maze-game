@@ -1,20 +1,25 @@
 
 public class Monster extends Character {
 	
-	private int health;
-	private int attack;
-	private int defense;
-	private int damage;
-	private int hasPotionProbability;
-	private int hasGoldProbability;
+	private double hasPotionProbability;
+	private double hasGoldProbability;
+	private boolean visible;
 	
-	public Monster() {
-		health = 100;
+	public Monster(int startHealth, int startAttack, int startDefense, int startDamage) {
+		super(startHealth, startAttack, startDefense, startDamage);
+		hasPotionProbability = 0.5;
+		hasGoldProbability = 0.5;
+		visible = false;
+	}
+	
+	public String toString() {
+		return "G";
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Monster m = new Monster(100,4,2,0);
+		System.out.println(m);
 	}
 
 }
