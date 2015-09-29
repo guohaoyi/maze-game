@@ -121,8 +121,7 @@ public class MazeGame {
 		map.printRealMaze();
 		setVisible();
 		map.printVisible();
-		while (!game)
-		{
+		while (!game) {
 			getMove();
 			map.printVisible();
 			checkGame();
