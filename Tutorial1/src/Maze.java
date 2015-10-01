@@ -77,9 +77,41 @@ public class Maze {
 			System.out.println();
 		}
 	}
+	
+	public void printSideBySide() {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (maze[i][j].getClass().getName().equals("Empty")) {
+					if (((Empty)maze[i][j]).isVisible())
+						System.out.print(maze[i][j]);
+				}
+				else if (maze[i][j].getClass().getName().equals("Wall")) {
+					if (((Wall)maze[i][j]).isVisible())
+						System.out.print(maze[i][j]);
+					else
+						System.out.print(" ");
+				}
+				else if (maze[i][j].getClass().getName().equals("Monster")) {
+					if (((Monster)maze[i][j]).isVisible())
+						System.out.print(maze[i][j]);
+					else
+						System.out.print(" ");
+				}
+				else if (maze[i][j].getClass().getName().equals("Player")) {
+					if (((Player)maze[i][j]).isVisible())
+						System.out.print(maze[i][j]);
+					else
+						System.out.print(" ");
+				}
+			}
+			System.out.println(" | ");
+			for (int k = 0; k < col; k++)
+				System.out.println(maze[i][k]);
+			System.out.println();
+		}
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Maze maz = new Maze("map01.txt");
 		maz.printMaze();
 		maz.printVisible();
