@@ -10,6 +10,7 @@ public class Maze {
 	public char[] monsterInitials = new char[26];
 	
 	public Maze(String fileName) {
+		readMonster();
 		try {
 			FileReader fin = new FileReader("bin//" + fileName);
 			Scanner scan = new Scanner(fin);
@@ -26,8 +27,16 @@ public class Maze {
 						playerRow = rowCount;
 						playerCol = i;
 					}
-					else if (str.charAt(i) == 'G')
-						maze[rowCount][i] = new Monster("Dragon",100,4,2,0,99,99);
+					else if ((str.charAt(i) == monsterInitials[0]) || (str.charAt(i) == monsterInitials[1])) {
+						for (int j = 0; j <= 25; j++) {
+							char c = monsterInitials[j];
+							if (str.charAt(i) == c) {
+								Monster m = monsters[j];
+								System.out.println(m);
+								maze[rowCount][i] = m;
+							}
+						}
+					}
 					else
 						maze[rowCount][i] = new Empty();
 				}
@@ -44,6 +53,31 @@ public class Maze {
 	public void readMonster() {
 		try {
 			FileReader fin = new FileReader("bin//monsters.txt");
+			Scanner scan = new Scanner(fin);
+			int index = 0;
+			while (scan.hasNext()) {
+				String name = scan.nextLine();
+				char initial = name.charAt(0);
+				monsterInitials[index] = initial;
+				int health = scan.nextInt();
+				int attack = scan.nextInt();
+				int defense = scan.nextInt();
+				int damage = scan.nextInt();
+				int potion = scan.nextInt();
+				int gold = scan.nextInt();
+				monsters[index] = new Monster(name, health, attack, defense, damage, potion, gold);
+				index++;
+				scan.nextLine();
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("FileNotFoundException: " + e.getMessage());
+		}
+	}
+	
+	public void readTreasure() {
+		try {
+			FileReader fin = new FileReader("bin//treasures.txt");
 			Scanner scan = new Scanner(fin);
 			int index = 0;
 			while (scan.hasNext()) {
@@ -111,7 +145,7 @@ public class Maze {
 	public static void main(String[] args) {
 		Maze maz = new Maze("map01.txt");
 		maz.printSideBySide();
-		maz.readMonster();
+		System.out.println(maz.monsterInitials[0]);
 
 	}
 

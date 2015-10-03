@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class MazeGame {
@@ -103,6 +104,17 @@ public class MazeGame {
 		}
 		else
 			System.out.println("Invalid input");
+	}
+	
+	public static void attack() {
+		Random playerRandom = new Random();
+		Random monsterRandom = new Random();
+		int playerAttack = p.getAttack() + p.
+		int playerDamage = p.getDamage();
+		int playerDefense = p.getDefense();
+		int playerHealth = p.getHealth();
+		int monsterattack = 
+		
 	}
 		
 	public static void checkGame() {

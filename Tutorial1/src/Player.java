@@ -10,12 +10,27 @@ public class Player extends Character {
 		super(startHealth, startAttack, startDefense, startDamage);
 		currentHealth = startHealth;
 		gold = 0;
-		bestWeapon = null;
+		setBestWeapon(null);
 		visible = true;
 	}
 	
 	public boolean isVisible() {
 		return visible;
+	}
+
+	public Weapon getBestWeapon() {
+		return bestWeapon;
+	}
+
+	public void setBestWeapon(Weapon bestWeapon) {
+		if (bestWeapon == null) {
+			this.bestWeapon = bestWeapon;
+			System.out.println("You've got a weapon!\n" + bestWeapon.getName() + "\nAttack Bonus: " + bestWeapon.getAttackBonus() + "\nDamage Bonus: " + bestWeapon.getDamageBonus());
+		}
+		else {
+			if (bestWeapon.compareTo(this.bestWeapon) == -1)
+				this.bestWeapon = bestWeapon;
+		}
 	}
 
 	public String toString() {
