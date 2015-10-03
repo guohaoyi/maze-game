@@ -109,13 +109,31 @@ public class MazeGame {
 	public static void attack(Monster m) {
 		Random playerRandom = new Random();
 		Random monsterRandom = new Random();
-		int playerAttack = p.getAttack();
-		int playerDamage = p.getDamage();
+		int playerAttack = p.getAttack() + p.getAttackBonus();
+		int playerDamage = p.getDamage() + p.getDamageBonus();
 		int playerDefense = p.getDefense();
-		int playerHealth = p.getHealth();
+		int playerHealth = p.getCurrentHealth();
 		int monsterAttack = m.getAttack();
 		int monsterDamage = m.getDamage();
-		
+		int monsterDefense = m.getDefense();
+		int monsterHealth = m.getHealth();
+		while ((playerHealth > 0) && (monsterHealth > 0)) {
+			if (playerAttack > monsterDefense) {
+				int actualPlayerDamage = playerRandom.nextInt(playerDamage);
+				monsterHealth = monsterHealth - actualPlayerDamage;
+				System.out.println("You hit " + m.getName() + " for " + actualPlayerDamage + " damage!");
+			}
+			else
+				System.out.println("You tried to hit " + m.getName() + " but missed it");
+			if (monsterAttack > playerDefense) {
+				int actualMonsterDamage = monsterRandom.nextInt(monsterDamage);
+				playerHealth = playerHealth - actualMonsterDamage;
+				System.out.println(m.getName() + " hit you for " + actualMonsterDamage + " damage!\nYour current health is " + playerHealth);
+			}
+			else
+				System.out.println(m.getName() + " tried to hit you but missed it");
+		}
+		System.out.println("The battle is over!");
 	}
 		
 	public static void checkGame() {
@@ -124,8 +142,24 @@ public class MazeGame {
 	}
 	
 	public static void checkMonster() {
-		if ((getType(playerRow + 1, playerCol).equals("Monster")) || (getType(playerRow - 1, playerCol).equals("Monster")) || (getType(playerRow, playerCol + 1).equals("Monster")) || (getType(playerRow, playerCol - 1).equals("Monster")))
-			System.out.println("bruh!");
+		if ((playerRow > 0) && (playerRow < map.row) && (playerCol > 0) && (playerCol < map.col)) {			
+			if (getType(playerRow + 1, playerCol).equals("Monster")) {
+				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
+				attack(m1);
+			}
+			else if (getType(playerRow - 1, playerCol).equals("Monster")) {
+				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
+				attack(m2);
+			}
+			else if (getType(playerRow, playerCol + 1).equals("Monster")) {
+				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
+				attack(m3);
+			}
+			else if (getType(playerRow, playerCol - 1).equals("Monster")) {
+				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
+				attack(m4);
+			}
+		}
 	}
 	
 	public static String getType(int row, int col) {

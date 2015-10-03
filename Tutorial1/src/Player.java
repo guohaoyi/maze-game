@@ -8,7 +8,7 @@ public class Player extends Character {
 	
 	public Player(int startHealth, int startAttack, int startDefense, int startDamage) {
 		super(startHealth, startAttack, startDefense, startDamage);
-		currentHealth = startHealth;
+		setCurrentHealth(startHealth);
 		gold = 0;
 		setBestWeapon(null);
 		visible = true;
@@ -18,19 +18,39 @@ public class Player extends Character {
 		return visible;
 	}
 
+	public int getCurrentHealth() {
+		return currentHealth;
+	}
+
+	public void setCurrentHealth(int currentHealth) {
+		this.currentHealth = currentHealth;
+	}
+
 	public Weapon getBestWeapon() {
 		return bestWeapon;
 	}
 
-	public void setBestWeapon(Weapon bestWeapon) {
-		if (bestWeapon == null) {
-			this.bestWeapon = bestWeapon;
-			System.out.println("You've got a weapon!\n" + bestWeapon.getName() + "\nAttack Bonus: " + bestWeapon.getAttackBonus() + "\nDamage Bonus: " + bestWeapon.getDamageBonus());
-		}
+	public void setBestWeapon(Weapon w) {
+		if (bestWeapon == null)
+			bestWeapon = w;
 		else {
-			if (bestWeapon.compareTo(this.bestWeapon) == -1)
-				this.bestWeapon = bestWeapon;
+			if(bestWeapon.compareTo(w) == -1)
+				bestWeapon = w;
 		}
+	}
+	
+	public int getAttackBonus() {
+		if (bestWeapon == null)
+			return 0;
+		else
+			return bestWeapon.getAttackBonus();
+	}
+	
+	public int getDamageBonus() {
+		if (bestWeapon == null)
+			return 0;
+		else
+			return bestWeapon.getDamageBonus();
 	}
 
 	public String toString() {

@@ -14,6 +14,10 @@ public class Monster extends Character {
 		setVisible(false);
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}
