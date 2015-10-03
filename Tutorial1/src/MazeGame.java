@@ -106,14 +106,15 @@ public class MazeGame {
 			System.out.println("Invalid input");
 	}
 	
-	public static void attack() {
+	public static void attack(Monster m) {
 		Random playerRandom = new Random();
 		Random monsterRandom = new Random();
-		int playerAttack = p.getAttack() + p.
+		int playerAttack = p.getAttack();
 		int playerDamage = p.getDamage();
 		int playerDefense = p.getDefense();
 		int playerHealth = p.getHealth();
-		int monsterattack = 
+		int monsterAttack = m.getAttack();
+		int monsterDamage = m.getDamage();
 		
 	}
 		
