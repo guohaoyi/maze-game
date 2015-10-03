@@ -118,14 +118,18 @@ public class MazeGame {
 		int monsterDefense = m.getDefense();
 		int monsterHealth = m.getHealth();
 		while ((playerHealth > 0) && (monsterHealth > 0)) {
-			if (playerAttack > monsterDefense) {
+			int pAttack = playerRandom.nextInt(playerAttack);
+			int mDefense = monsterRandom.nextInt(monsterDefense);
+			if (pAttack > mDefense) {
 				int actualPlayerDamage = playerRandom.nextInt(playerDamage);
 				monsterHealth = monsterHealth - actualPlayerDamage;
 				System.out.println("You hit " + m.getName() + " for " + actualPlayerDamage + " damage!");
 			}
 			else
 				System.out.println("You tried to hit " + m.getName() + " but missed it");
-			if (monsterAttack > playerDefense) {
+			int mAttack = monsterRandom.nextInt(monsterAttack);
+			int pDefense = playerRandom.nextInt(playerDefense);
+			if (mAttack > pDefense) {
 				int actualMonsterDamage = monsterRandom.nextInt(monsterDamage);
 				playerHealth = playerHealth - actualMonsterDamage;
 				System.out.println(m.getName() + " hit you for " + actualMonsterDamage + " damage!\nYour current health is " + playerHealth);
