@@ -237,7 +237,7 @@ public class MazeGame {
 	
 	public static void dropTreasure(int row, int col) {
 		Random treasureRandom = new Random();
-		int index = treasureRandom.nextInt(2);
+		int index = treasureRandom.nextInt(3);
 		Treasure t = map.treasures[index];
 		map.maze[row][col] = t;
 	}
