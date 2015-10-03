@@ -9,7 +9,7 @@ public class Player extends Character {
 	public Player(int startHealth, int startAttack, int startDefense, int startDamage) {
 		super(startHealth, startAttack, startDefense, startDamage);
 		setCurrentHealth(startHealth);
-		gold = 0;
+		setGold(0);
 		setBestWeapon(null);
 		visible = true;
 	}
@@ -24,6 +24,22 @@ public class Player extends Character {
 
 	public void setCurrentHealth(int currentHealth) {
 		this.currentHealth = currentHealth;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+	
+	public void increaseGold(int increase) {
+		gold = gold + increase;
+	}
+	
+	public void increaseCurrentHealth(int increase) {
+		currentHealth = currentHealth + increase;
 	}
 
 	public Weapon getBestWeapon() {

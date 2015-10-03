@@ -8,6 +8,7 @@ public class Treasure {
 	protected int attackBonus;
 	protected int damageBonus;
 	private int probability;
+	private boolean visible;
 	private boolean pickedUp;
 	
 	public Treasure(String type, String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
@@ -83,6 +84,18 @@ public class Treasure {
 
 	public void setPickedUp(boolean pickedUp) {
 		this.pickedUp = pickedUp;
+	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public String toString() {
+		return name.substring(0, 1);
 	}
 
 	public static void main(String[] args) {

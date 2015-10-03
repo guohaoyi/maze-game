@@ -133,12 +133,8 @@ public class MazeGame {
 			else
 				System.out.println(m.getName() + " tried to hit you but missed it");
 		}
+		p.setCurrentHealth(playerHealth);
 		System.out.println("The battle is over!");
-	}
-		
-	public static void checkGame() {
-		if (map.maze[exitRow][exitCol].equals(p))
-			game = true;
 	}
 	
 	public static void checkMonster() {
@@ -146,20 +142,109 @@ public class MazeGame {
 			if (getType(playerRow + 1, playerCol).equals("Monster")) {
 				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
 				attack(m1);
+				dropTreasure(playerRow + 1, playerCol);
 			}
 			else if (getType(playerRow - 1, playerCol).equals("Monster")) {
 				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
 				attack(m2);
+				dropTreasure(playerRow - 1, playerCol);
 			}
 			else if (getType(playerRow, playerCol + 1).equals("Monster")) {
 				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
 				attack(m3);
+				dropTreasure(playerRow, playerCol + 1);
 			}
 			else if (getType(playerRow, playerCol - 1).equals("Monster")) {
 				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
 				attack(m4);
+				dropTreasure(playerRow, playerCol - 1);
 			}
 		}
+	}
+	
+	public static void checkTreasure() {
+		if ((playerRow > 0) && (playerRow < map.row) && (playerCol > 0) && (playerCol < map.col)) {			
+			if (getType(playerRow + 1, playerCol).equals("Treasure")) {
+				Treasure t1 = (Treasure)map.maze[playerRow + 1][playerCol];
+				if (t1.toString().equals("B")) {
+					p.increaseGold(t1.getValue());
+					System.out.println("You've got " + t1.getValue() + " gold!");
+				}
+				else if (t1.toString().equals("H")) {
+					p.increaseCurrentHealth(t1.getHealthRestoration());
+					System.out.println("You've got " + t1.getHealthRestoration() + " health!");
+				}
+				else if (t1.toString().equals("+")) {
+					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
+					p.setBestWeapon(w);
+					System.out.println("You've got " + t1.getName() + " weapon!");
+				}
+				map.maze[playerRow + 1][playerCol] = new Empty();
+			}
+			else if (getType(playerRow - 1, playerCol).equals("Treasure")) {
+				Treasure t2 = (Treasure)map.maze[playerRow - 1][playerCol];
+				if (t2.toString().equals("B")) {
+					p.increaseGold(t2.getValue());
+					System.out.println("You've got " + t2.getValue() + " gold!");
+				}
+				else if (t2.toString().equals("H")) {
+					p.increaseCurrentHealth(t2.getHealthRestoration());
+					System.out.println("You've got " + t2.getHealthRestoration() + " health!");
+				}
+				else if (t2.toString().equals("+")) {
+					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
+					p.setBestWeapon(w);
+					System.out.println("You've got " + t2.getName() + " weapon!");
+				}
+				map.maze[playerRow - 1][playerCol] = new Empty();
+			}
+			else if (getType(playerRow, playerCol + 1).equals("Treasure")) {
+				Treasure t3 = (Treasure)map.maze[playerRow][playerCol + 1];
+				if (t3.toString().equals("B")) {
+					p.increaseGold(t3.getValue());
+					System.out.println("You've got " + t3.getValue() + " gold!");
+				}
+				else if (t3.toString().equals("H")) {
+					p.increaseCurrentHealth(t3.getHealthRestoration());
+					System.out.println("You've got " + t3.getHealthRestoration() + " health!");
+				}
+				else if (t3.toString().equals("+")) {
+					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
+					p.setBestWeapon(w);
+					System.out.println("You've got " + t3.getName() + " weapon!");
+				}
+				map.maze[playerRow][playerCol + 1] = new Empty();
+			}
+			else if (getType(playerRow, playerCol - 1).equals("Treasure")) {
+				Treasure t4 = (Treasure)map.maze[playerRow][playerCol - 1];
+				if (t4.toString().equals("B")) {
+					p.increaseGold(t4.getValue());
+					System.out.println("You've got " + t4.getValue() + " gold!");
+				}
+				else if (t4.toString().equals("H")) {
+					p.increaseCurrentHealth(t4.getHealthRestoration());
+					System.out.println("You've got " + t4.getHealthRestoration() + " health!");
+				}
+				else if (t4.toString().equals("+")) {
+					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
+					p.setBestWeapon(w);
+					System.out.println("You've got " + t4.getName() + " weapon!");
+				}
+				map.maze[playerRow][playerCol - 1] = new Empty();
+			}
+		}
+	}
+	
+	public static void dropTreasure(int row, int col) {
+		Random treasureRandom = new Random();
+		int index = treasureRandom.nextInt(2);
+		Treasure t = map.treasures[index];
+		map.maze[row][col] = t;
+	}
+	
+	public static void checkGame() {
+		if ((map.maze[exitRow][exitCol].equals(p)) || (p.getCurrentHealth() <= 0))
+			game = true;
 	}
 	
 	public static String getType(int row, int col) {
@@ -179,8 +264,9 @@ public class MazeGame {
 		map.printSideBySide();
 		while (!game) {
 			getMove();
-			map.printSideBySide();
 			checkMonster();
+			checkTreasure();
+			map.printSideBySide();
 			checkGame();
 		}
 		System.out.println("Game!");

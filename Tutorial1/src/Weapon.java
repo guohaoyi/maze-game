@@ -1,7 +1,7 @@
 
 public class Weapon extends Treasure{
 	
-	public Weapon(String name, int value, int healthRestoration, int healthRestoration1, int attackBonus, int damageBonus, int probability) {
+	public Weapon(String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
 		super("Weapon", name, value, healthRestoration, attackBonus, damageBonus, probability);
 	}
 	
