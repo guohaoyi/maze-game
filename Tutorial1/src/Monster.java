@@ -1,14 +1,16 @@
 
 public class Monster extends Character {
 	
-	private double hasPotionProbability;
-	private double hasGoldProbability;
+	private String name;
+	private int hasPotionProbability;
+	private int hasGoldProbability;
 	private boolean visible;
 	
-	public Monster(int startHealth, int startAttack, int startDefense, int startDamage) {
+	public Monster(String name, int startHealth, int startAttack, int startDefense, int startDamage, int potion, int gold) {
 		super(startHealth, startAttack, startDefense, startDamage);
-		hasPotionProbability = 0.5;
-		hasGoldProbability = 0.5;
+		this.name = name;
+		hasPotionProbability = potion;
+		hasGoldProbability = gold;
 		setVisible(false);
 	}
 	
@@ -21,12 +23,12 @@ public class Monster extends Character {
 	}
 
 	public String toString() {
-		return "G";
+		return name.substring(0, 1);
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Monster m = new Monster(100,4,2,0);
+		Monster m = new Monster("Dragon",100,4,2,0,99,99);
 		System.out.println(m);
 	}
 
