@@ -1,7 +1,7 @@
 
 public class Wall {
 	
-	private boolean visible;
+	protected boolean visible;
 	
 	public Wall() {
 		setVisible(false);

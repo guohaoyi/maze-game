@@ -1,15 +1,15 @@
 
 public class Treasure {
 	
-	private String type;
-	private String name;
-	private int value;
-	private int healthRestoration;
+	protected String type;
+	protected String name;
+	protected int value;
+	protected int healthRestoration;
 	protected int attackBonus;
 	protected int damageBonus;
-	private int probability;
-	private boolean visible;
-	private boolean pickedUp;
+	protected int probability;
+	protected boolean visible;
+	protected boolean pickedUp;
 	
 	public Treasure(String type, String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
 		this.setType(type);

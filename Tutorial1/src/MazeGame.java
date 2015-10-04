@@ -36,6 +36,10 @@ public class MazeGame {
 				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
 				m1.setVisible(true);
 			}
+			else if (map.maze[playerRow + 1][playerCol].getClass().getName().equals("Treasure")) {
+				Treasure t1 = (Treasure)map.maze[playerRow + 1][playerCol];
+				t1.setVisible(true);
+			}
 		}
 		if (playerRow - 1 >= 0) {
 			if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Wall")) {
@@ -45,6 +49,10 @@ public class MazeGame {
 			else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Monster")) {
 				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
 				m2.setVisible(true);
+			}
+			else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Treasure")) {
+				Treasure t2 = (Treasure)map.maze[playerRow - 1][playerCol];
+				t2.setVisible(true);
 			}
 		}
 		if (playerCol + 1 <= map.col) {
@@ -56,6 +64,10 @@ public class MazeGame {
 				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
 				m3.setVisible(true);
 			}
+			else if (map.maze[playerRow][playerCol + 1].getClass().getName().equals("Treasure")) {
+				Treasure t3 = (Treasure)map.maze[playerRow][playerCol + 1];
+				t3.setVisible(true);
+			}
 		}
 		if (playerCol - 1 >= 0) {
 			if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Wall")) {
@@ -65,6 +77,10 @@ public class MazeGame {
 			else if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Monster")) {
 				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
 				m4.setVisible(true);
+			}
+			else if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Treasure")) {
+				Treasure t4 = (Treasure)map.maze[playerRow][playerCol - 1];
+				t4.setVisible(true);
 			}
 		}
 	}

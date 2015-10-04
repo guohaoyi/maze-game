@@ -1,7 +1,7 @@
 
 public class Empty {
 	
-	private boolean visible;
+	protected boolean visible;
 	
 	public Empty() {
 		visible = true;

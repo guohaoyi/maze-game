@@ -1,10 +1,10 @@
 
 public class Monster extends Character {
 	
-	private String name;
-	private int hasPotionProbability;
-	private int hasGoldProbability;
-	private boolean visible;
+	protected String name;
+	protected int hasPotionProbability;
+	protected int hasGoldProbability;
+	protected boolean visible;
 	
 	public Monster(String name, int startHealth, int startAttack, int startDefense, int startDamage, int potion, int gold) {
 		super(startHealth, startAttack, startDefense, startDamage);

@@ -1,10 +1,10 @@
 
 public class Player extends Character {
 	
-	private int currentHealth;
-	private int gold;
-	private Weapon bestWeapon;
-	private boolean visible;
+	protected int currentHealth;
+	protected int gold;
+	protected Weapon bestWeapon;
+	protected boolean visible;
 	
 	public Player(int startHealth, int startAttack, int startDefense, int startDamage) {
 		super(startHealth, startAttack, startDefense, startDamage);
@@ -40,6 +40,8 @@ public class Player extends Character {
 	
 	public void increaseCurrentHealth(int increase) {
 		currentHealth = currentHealth + increase;
+		if (currentHealth > health)
+			currentHealth = health;
 	}
 
 	public Weapon getBestWeapon() {

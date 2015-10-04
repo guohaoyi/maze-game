@@ -1,10 +1,10 @@
 
 public class Character {
 	
-	private int health;
-	private int attack;
-	private int defense;
-	private int damage;
+	protected int health;
+	protected int attack;
+	protected int defense;
+	protected int damage;
 	
 	public Character(int startHealth, int startAttack, int startDefense, int startDamage) {
 		setHealth(startHealth);
