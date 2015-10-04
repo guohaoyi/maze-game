@@ -122,7 +122,7 @@ public class MazeGame {
 			System.out.println("Invalid input");
 	}
 	
-	public static void attack(Monster m) {
+	public static void attack(Monster m, int row, int col) {
 		Random playerRandom = new Random();
 		Random monsterRandom = new Random();
 		int playerAttack = p.getAttack() + p.getAttackBonus();
@@ -144,6 +144,7 @@ public class MazeGame {
 				if (monsterHealth <= 0) {
 					monsterDies = true;
 					System.out.println(m.getName() + " died!");
+					dropTreasure(m, row, col);
 					break;
 				}
 			}
@@ -171,26 +172,22 @@ public class MazeGame {
 			if (getType(playerRow + 1, playerCol).equals("Monster")) {
 				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
 				System.out.println("You ran into a monster, which is a(n) " + m1.getName());
-				attack(m1);
-				dropTreasure(m1, playerRow + 1, playerCol);
+				attack(m1, playerRow + 1, playerCol);
 			}
 			else if (getType(playerRow - 1, playerCol).equals("Monster")) {
 				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
 				System.out.println("You ran into a monster, which is a(n) " + m2.getName());
-				attack(m2);
-				dropTreasure(m2, playerRow - 1, playerCol);
+				attack(m2, playerRow - 1, playerCol);
 			}
 			else if (getType(playerRow, playerCol + 1).equals("Monster")) {
 				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
 				System.out.println("You ran into a monster, which is a(n) " + m3.getName());
-				attack(m3);
-				dropTreasure(m3, playerRow, playerCol + 1);
+				attack(m3, playerRow, playerCol + 1);
 			}
 			else if (getType(playerRow, playerCol - 1).equals("Monster")) {
 				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
 				System.out.println("You ran into a monster, which is a(n) " + m4.getName());
-				attack(m4);
-				dropTreasure(m4, playerRow, playerCol - 1);
+				attack(m4, playerRow, playerCol - 1);
 			}
 		}
 	}
