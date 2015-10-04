@@ -18,12 +18,12 @@ public class MazeGame {
 	}
 	
 	public static boolean checkEmpty(int row, int col) {
-		if (map.maze[row][col].getClass().getName().equals("Empty"))
-			return true;
-		else {
-			System.out.println("Invalid move");
+		if (map.maze[row][col].getClass().getName().equals("Wall")) {
+			System.out.println("Sorry – you can’t walk through walls.");
 			return false;
 		}
+		else
+			return true;
 	}
 	
 	public static void setVisible() {
@@ -36,10 +36,10 @@ public class MazeGame {
 				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
 				m1.setVisible(true);
 			}
-			else if (map.maze[playerRow + 1][playerCol].getClass().getName().equals("Treasure")) {
-				Treasure t1 = (Treasure)map.maze[playerRow + 1][playerCol];
-				t1.setVisible(true);
-			}
+			//else if (map.maze[playerRow + 1][playerCol].getClass().getName().equals("Treasure")) {
+				//Treasure t1 = (Treasure)map.maze[playerRow + 1][playerCol];
+				//t1.setVisible(true);
+			//}
 		}
 		if (playerRow - 1 >= 0) {
 			if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Wall")) {
@@ -50,10 +50,10 @@ public class MazeGame {
 				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
 				m2.setVisible(true);
 			}
-			else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Treasure")) {
-				Treasure t2 = (Treasure)map.maze[playerRow - 1][playerCol];
-				t2.setVisible(true);
-			}
+			//else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Treasure")) {
+				//Treasure t2 = (Treasure)map.maze[playerRow - 1][playerCol];
+				//t2.setVisible(true);
+			//}
 		}
 		if (playerCol + 1 <= map.col) {
 			if (map.maze[playerRow][playerCol + 1].getClass().getName().equals("Wall")) {
@@ -64,10 +64,10 @@ public class MazeGame {
 				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
 				m3.setVisible(true);
 			}
-			else if (map.maze[playerRow][playerCol + 1].getClass().getName().equals("Treasure")) {
-				Treasure t3 = (Treasure)map.maze[playerRow][playerCol + 1];
-				t3.setVisible(true);
-			}
+			//else if (map.maze[playerRow][playerCol + 1].getClass().getName().equals("Treasure")) {
+				//Treasure t3 = (Treasure)map.maze[playerRow][playerCol + 1];
+				//t3.setVisible(true);
+			//}
 		}
 		if (playerCol - 1 >= 0) {
 			if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Wall")) {
@@ -78,10 +78,10 @@ public class MazeGame {
 				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
 				m4.setVisible(true);
 			}
-			else if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Treasure")) {
-				Treasure t4 = (Treasure)map.maze[playerRow][playerCol - 1];
-				t4.setVisible(true);
-			}
+			//else if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Treasure")) {
+				//Treasure t4 = (Treasure)map.maze[playerRow][playerCol - 1];
+				//t4.setVisible(true);
+			//}
 		}
 	}
 	
@@ -133,6 +133,7 @@ public class MazeGame {
 		int monsterDamage = m.getDamage();
 		int monsterDefense = m.getDefense();
 		int monsterHealth = m.getHealth();
+		boolean monsterDies = false;
 		while ((playerHealth > 0) && (monsterHealth > 0)) {
 			int pAttack = playerRandom.nextInt(playerAttack);
 			int mDefense = monsterRandom.nextInt(monsterDefense);
@@ -140,6 +141,11 @@ public class MazeGame {
 				int actualPlayerDamage = playerRandom.nextInt(playerDamage);
 				monsterHealth = monsterHealth - actualPlayerDamage;
 				System.out.println("You hit " + m.getName() + " for " + actualPlayerDamage + " damage!");
+				if (monsterHealth <= 0) {
+					monsterDies = true;
+					System.out.println(m.getName() + " died!");
+					break;
+				}
 			}
 			else
 				System.out.println("You tried to hit " + m.getName() + " but missed it");
@@ -148,36 +154,43 @@ public class MazeGame {
 			if (mAttack > pDefense) {
 				int actualMonsterDamage = monsterRandom.nextInt(monsterDamage);
 				playerHealth = playerHealth - actualMonsterDamage;
-				System.out.println(m.getName() + " hit you for " + actualMonsterDamage + " damage!\nYour current health is " + playerHealth);
+				System.out.println(m.getName() + " hit you for " + actualMonsterDamage + " damage! Your current health is " + playerHealth);
+				if (playerHealth <= 0) {
+					System.out.println("You died!");
+					break;
+				}
 			}
 			else
 				System.out.println(m.getName() + " tried to hit you but missed it");
 		}
 		p.setCurrentHealth(playerHealth);
-		System.out.println("The battle is over!");
 	}
 	
 	public static void checkMonster() {
 		if ((playerRow > 0) && (playerRow < map.row) && (playerCol > 0) && (playerCol < map.col)) {			
 			if (getType(playerRow + 1, playerCol).equals("Monster")) {
 				Monster m1 = (Monster)map.maze[playerRow + 1][playerCol];
+				System.out.println("You ran into a monster, which is a(n) " + m1.getName());
 				attack(m1);
-				dropTreasure(playerRow + 1, playerCol);
+				dropTreasure(m1, playerRow + 1, playerCol);
 			}
 			else if (getType(playerRow - 1, playerCol).equals("Monster")) {
 				Monster m2 = (Monster)map.maze[playerRow - 1][playerCol];
+				System.out.println("You ran into a monster, which is a(n) " + m2.getName());
 				attack(m2);
-				dropTreasure(playerRow - 1, playerCol);
+				dropTreasure(m2, playerRow - 1, playerCol);
 			}
 			else if (getType(playerRow, playerCol + 1).equals("Monster")) {
 				Monster m3 = (Monster)map.maze[playerRow][playerCol + 1];
+				System.out.println("You ran into a monster, which is a(n) " + m3.getName());
 				attack(m3);
-				dropTreasure(playerRow, playerCol + 1);
+				dropTreasure(m3, playerRow, playerCol + 1);
 			}
 			else if (getType(playerRow, playerCol - 1).equals("Monster")) {
 				Monster m4 = (Monster)map.maze[playerRow][playerCol - 1];
+				System.out.println("You ran into a monster, which is a(n) " + m4.getName());
 				attack(m4);
-				dropTreasure(playerRow, playerCol - 1);
+				dropTreasure(m4, playerRow, playerCol - 1);
 			}
 		}
 	}
@@ -255,11 +268,19 @@ public class MazeGame {
 		}
 	}
 	
-	public static void dropTreasure(int row, int col) {
+	public static void dropTreasure(Monster m, int row, int col) {
 		Random treasureRandom = new Random();
-		int index = treasureRandom.nextInt(3);
-		Treasure t = map.treasures[index];
-		map.maze[row][col] = t;
+		int goldRandom = treasureRandom.nextInt(100);
+		if (goldRandom <= m.getHasGoldProbability()) {
+			Treasure gold = map.treasures[2];
+			map.maze[row][col] = gold;
+		}
+		checkTreasure();
+		int potionRandom = treasureRandom.nextInt(100);
+		if (potionRandom <= m.getHasPotionProbability()) {
+			Treasure potion = map.treasures[1];
+			map.maze[row][col] = potion;
+		}
 	}
 	
 	public static void checkGame() {
@@ -270,6 +291,10 @@ public class MazeGame {
 	public static String getType(int row, int col) {
 		String type = map.maze[row][col].getClass().getName();
 		return type;
+	}
+	
+	public static void printTenLines() {
+		System.out.println("\n\n\n\n\n\n\n\n\n");
 	}
 	
 	public static void main(String[] args) {
@@ -286,6 +311,7 @@ public class MazeGame {
 			getMove();
 			checkMonster();
 			checkTreasure();
+			//printTenLines();
 			map.printSideBySide();
 			checkGame();
 		}
