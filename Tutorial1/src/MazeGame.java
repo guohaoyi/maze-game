@@ -202,7 +202,7 @@ public class MazeGame {
 				}
 				else if (t1.toString().equals("H")) {
 					p.increaseCurrentHealth(t1.getHealthRestoration());
-					System.out.println("You've got " + t1.getHealthRestoration() + " health!");
+					System.out.println("You've got " + t1.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 				}
 				else if (t1.toString().equals("+")) {
 					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
@@ -219,7 +219,7 @@ public class MazeGame {
 				}
 				else if (t2.toString().equals("H")) {
 					p.increaseCurrentHealth(t2.getHealthRestoration());
-					System.out.println("You've got " + t2.getHealthRestoration() + " health!");
+					System.out.println("You've got " + t2.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 				}
 				else if (t2.toString().equals("+")) {
 					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
@@ -236,7 +236,7 @@ public class MazeGame {
 				}
 				else if (t3.toString().equals("H")) {
 					p.increaseCurrentHealth(t3.getHealthRestoration());
-					System.out.println("You've got " + t3.getHealthRestoration() + " health!");
+					System.out.println("You've got " + t3.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 				}
 				else if (t3.toString().equals("+")) {
 					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
@@ -253,7 +253,7 @@ public class MazeGame {
 				}
 				else if (t4.toString().equals("H")) {
 					p.increaseCurrentHealth(t4.getHealthRestoration());
-					System.out.println("You've got " + t4.getHealthRestoration() + " health!");
+					System.out.println("You've got " + t4.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 				}
 				else if (t4.toString().equals("+")) {
 					Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
