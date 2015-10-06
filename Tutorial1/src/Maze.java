@@ -26,7 +26,7 @@ public class Maze {
 					if (str.charAt(i) == 'W')
 						maze[rowCount][i] = new Wall();
 					else if (str.charAt(i) == 'U') {
-						maze[rowCount][i] = new Player(1000, 101, 101, 25);
+						readPlayer(rowCount, i);
 						playerRow = rowCount;
 						playerCol = i;
 					}
@@ -61,6 +61,22 @@ public class Maze {
 		}
 	}
 	
+	public void readPlayer(int row, int col) {
+		try {
+			FileReader fin = new FileReader("bin//player.txt");
+			Scanner scan = new Scanner(fin);
+			int health = scan.nextInt();
+			int attack = scan.nextInt();
+			int defense = scan.nextInt();
+			int damage = scan.nextInt();
+			maze[row][col] = new Player(health, attack, defense, damage);
+			scan.close();
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("FileNotFoundException: " + e.getMessage());
+		}
+	}
+	
 	public void readMonster() {
 		try {
 			FileReader fin = new FileReader("bin//monsters.txt");
@@ -80,29 +96,12 @@ public class Maze {
 				index++;
 				scan.nextLine();
 			}
+			scan.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("FileNotFoundException: " + e.getMessage());
 		}
 	}
-	
-	/*
-	public static Player readPlayer() {
-		try {
-			FileReader fin = new FileReader("bin//player.txt");
-			Scanner scan = new Scanner(fin);
-			int health = scan.nextInt();
-			int attack = scan.nextInt();
-			int defense = scan.nextInt();
-			int damage = scan.nextInt();
-			Player p = new Player(health, attack, defense, damage);
-			return p;
-		}
-		catch (FileNotFoundException e) {
-			System.out.println("FileNotFoundException: " + e.getMessage());
-		}
-	}
-	*/
 	
 	public void readTreasure() {
 		try {
@@ -123,6 +122,7 @@ public class Maze {
 				index++;
 				scan.nextLine();
 			}
+			scan.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("FileNotFoundException: " + e.getMessage());

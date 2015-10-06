@@ -8,12 +8,12 @@ public class MazeGame {
 	public static Maze map;
 	public static Player p;
 	public static Monster[] monsters;
+	private static Scanner scan;
 	
 	public static void getMove() {
 		System.out.println("Input the direction you want to move.");
-		Scanner sc = new Scanner(System.in);
-		char ch = sc.nextLine().charAt(0);
-		System.out.println(ch);
+		scan = new Scanner(System.in);
+		char ch = scan.nextLine().charAt(0);
 		move(ch);
 	}
 	
@@ -133,7 +133,7 @@ public class MazeGame {
 		int monsterDamage = m.getDamage();
 		int monsterDefense = m.getDefense();
 		int monsterHealth = m.getHealth();
-		boolean monsterDies = false;
+		//boolean monsterDies = false;
 		while ((playerHealth > 0) && (monsterHealth > 0)) {
 			int pAttack = playerRandom.nextInt(playerAttack);
 			int mDefense = monsterRandom.nextInt(monsterDefense);
@@ -142,7 +142,7 @@ public class MazeGame {
 				monsterHealth = monsterHealth - actualPlayerDamage;
 				System.out.println("You hit " + m.getName() + " for " + actualPlayerDamage + " damage!");
 				if (monsterHealth <= 0) {
-					monsterDies = true;
+					//monsterDies = true;
 					System.out.println(m.getName() + " died!");
 					dropTreasure(m, row, col);
 					break;
