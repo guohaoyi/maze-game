@@ -130,7 +130,7 @@ public class MazeGame {
 			System.out.println("Invalid input");
 	}
 	
-	public static void attack(Monster m, int row, int col) {
+	public static void attack(Monster m) {
 		Random playerRandom = new Random();
 		Random monsterRandom = new Random();
 		int playerAttack = p.getAttack() + p.getAttackBonus();
@@ -152,7 +152,7 @@ public class MazeGame {
 				if (monsterHealth <= 0) {
 					//monsterDies = true;
 					System.out.println(m.getName() + " died!");
-					dropTreasure(m, row, col);
+					dropTreasure(m);
 					break;
 				}
 			}
@@ -163,9 +163,11 @@ public class MazeGame {
 			if (mAttack > pDefense) {
 				int actualMonsterDamage = monsterRandom.nextInt(monsterDamage);
 				playerHealth = playerHealth - actualMonsterDamage;
+				p.setCurrentHealth(playerHealth);
 				System.out.println(m.getName() + " hit you for " + actualMonsterDamage + " damage! Your current health is " + playerHealth);
 				if (playerHealth <= 0) {
 					System.out.println("You died!");
+					game = true;
 					break;
 				}
 			}
@@ -179,7 +181,7 @@ public class MazeGame {
 		if (getType(row, col).equals("Monster")) {
 			Monster m = (Monster)map.maze[row][col];
 			System.out.println("You ran into a monster, which is a(n) " + m.getName());
-			attack(m, row, col);
+			attack(m);
 		}
 	}
 	
@@ -195,24 +197,26 @@ public class MazeGame {
 				System.out.println("You've got " + t.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 			}
 			else if (t.toString().equals("S")) {
-				Weapon w = new Weapon("+2 Sword", 10000, 0, 10, 15, 10);
+				Weapon w = new Weapon("Sword +2", 10000, 0, 10, 15, 10);
 				p.setBestWeapon(w);
 				System.out.println("You've got " + t.getName() + " weapon! Your current weapon is " + p.getBestWeapon().getName());
 			}
 		}
 	}
 	
-	public static void dropTreasure(Monster m, int row, int col) {
+	public static void dropTreasure(Monster m) {
 		Random treasureRandom = new Random();
 		int goldRandom = treasureRandom.nextInt(100);
 		if (goldRandom <= m.getHasGoldProbability()) {
 			Treasure gold = map.treasures[2];
-			map.maze[row][col] = gold;
+			p.increaseGold(gold.getValue());
+			System.out.println(m.getName() + " dropped some gold! You've got " + gold.getValue() + " gold! You currently have " + p.getGold() + " gold");
 		}
 		int potionRandom = treasureRandom.nextInt(100);
 		if (potionRandom <= m.getHasPotionProbability()) {
 			Treasure potion = map.treasures[1];
-			map.maze[row][col] = potion;
+			p.increaseCurrentHealth(potion.getHealthRestoration());
+			System.out.println(m.getName() + " dropped a health potion! You've got " + potion.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 		}
 	}
 	
