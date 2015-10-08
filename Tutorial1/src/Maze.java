@@ -139,8 +139,8 @@ public class Maze {
 				}
 				scan.nextLine();
 			}
-			treasureNum = treasureIndex + 1;
-			weaponNum = weaponIndex + 1;
+			treasureNum = treasureIndex;
+			weaponNum = weaponIndex;
 			scan.close();
 		}
 		catch (FileNotFoundException e) {

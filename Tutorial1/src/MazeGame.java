@@ -208,11 +208,11 @@ public class MazeGame {
 	public static void checkTreasure(int row, int col) {
 		if (getType(row, col).equals("Treasure")) {
 			Treasure t = (Treasure)map.maze[row][col];
-			if (t.toString().equals("B")) {
+			if (t.getType().equals("Money")) {
 				p.increaseGold(t.getValue());
 				System.out.println("You've got " + t.getValue() + " gold! You currently have " + p.getGold() + " gold");
 			}
-			else if (t.toString().equals("H")) {
+			else if (t.getType().equals("Potion")) {
 				p.increaseCurrentHealth(t.getHealthRestoration());
 				System.out.println("You've got " + t.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 			}
@@ -222,10 +222,8 @@ public class MazeGame {
 	public static void checkWeapon(int row, int col) {
 		if (getType(row, col).equals("Weapon")) {
 			Weapon w = (Weapon)map.maze[row][col];
-			if (w.toString().equals("S")) {
-				p.setBestWeapon(w);
-				System.out.println("You've got " + w.getName() + " weapon! Your current weapon is " + p.getBestWeapon().getName());
-			}
+			p.setBestWeapon(w);
+			System.out.println("You've got " + w.getName() + " weapon! Your current weapon is " + p.getBestWeapon().getName());
 		}
 	}
 	
