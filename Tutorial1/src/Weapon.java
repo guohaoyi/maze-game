@@ -1,8 +1,8 @@
 
 public class Weapon extends Treasure{
 	
-	public Weapon(String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
-		super("Weapon", name, value, healthRestoration, attackBonus, damageBonus, probability);
+	public Weapon(String type, String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
+		super(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
 	}
 	
 	public int compareTo(Weapon w) {

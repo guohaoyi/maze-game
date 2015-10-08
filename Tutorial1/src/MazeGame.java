@@ -40,6 +40,10 @@ public class MazeGame {
 				Treasure t1 = (Treasure)map.maze[playerRow + 1][playerCol];
 				t1.setVisible(true);
 			}
+			else if (map.maze[playerRow + 1][playerCol].getClass().getName().equals("Weapon")) {
+				Weapon e1 = (Weapon)map.maze[playerRow + 1][playerCol];
+				e1.setVisible(true);
+			}
 		}
 		if (playerRow - 1 >= 0) {
 			if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Wall")) {
@@ -53,6 +57,10 @@ public class MazeGame {
 			else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Treasure")) {
 				Treasure t2 = (Treasure)map.maze[playerRow - 1][playerCol];
 				t2.setVisible(true);
+			}
+			else if (map.maze[playerRow - 1][playerCol].getClass().getName().equals("Weapon")) {
+				Weapon e2 = (Weapon)map.maze[playerRow - 1][playerCol];
+				e2.setVisible(true);
 			}
 		}
 		if (playerCol + 1 <= map.col) {
@@ -68,6 +76,10 @@ public class MazeGame {
 				Treasure t3 = (Treasure)map.maze[playerRow][playerCol + 1];
 				t3.setVisible(true);
 			}
+			else if (map.maze[playerRow][playerCol + 1].getClass().getName().equals("Weapon")) {
+				Weapon e3 = (Weapon)map.maze[playerRow][playerCol + 1];
+				e3.setVisible(true);
+			}
 		}
 		if (playerCol - 1 >= 0) {
 			if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Wall")) {
@@ -82,6 +94,10 @@ public class MazeGame {
 				Treasure t4 = (Treasure)map.maze[playerRow][playerCol - 1];
 				t4.setVisible(true);
 			}
+			else if (map.maze[playerRow][playerCol - 1].getClass().getName().equals("Weapon")) {
+				Weapon e4 = (Weapon)map.maze[playerRow][playerCol - 1];
+				e4.setVisible(true);
+			}
 		}
 	}
 	
@@ -89,6 +105,7 @@ public class MazeGame {
 		if (ch == 'n') {
 			if(checkEmpty(playerRow - 1, playerCol)) {
 				checkTreasure(playerRow - 1, playerCol);
+				checkWeapon(playerRow - 1, playerCol);
 				checkMonster(playerRow - 1, playerCol);
 				map.maze[playerRow - 1][playerCol] = p;
 				map.maze[playerRow][playerCol] = new Empty();
@@ -99,6 +116,7 @@ public class MazeGame {
 		else if (ch == 's') {
 			if(checkEmpty(playerRow + 1, playerCol)) {
 				checkTreasure(playerRow + 1, playerCol);
+				checkWeapon(playerRow + 1, playerCol);
 				checkMonster(playerRow + 1, playerCol);
 				map.maze[playerRow + 1][playerCol] = p;
 				map.maze[playerRow][playerCol] = new Empty();
@@ -109,6 +127,7 @@ public class MazeGame {
 		else if (ch == 'e') {
 			if(checkEmpty(playerRow, playerCol + 1)) {
 				checkTreasure(playerRow, playerCol + 1);
+				checkWeapon(playerRow, playerCol + 1);
 				checkMonster(playerRow, playerCol + 1);
 				map.maze[playerRow][playerCol + 1] = p;
 				map.maze[playerRow][playerCol] = new Empty();
@@ -119,6 +138,7 @@ public class MazeGame {
 		else if (ch == 'w') {
 			if(checkEmpty(playerRow, playerCol - 1)) {
 				checkTreasure(playerRow, playerCol - 1);
+				checkWeapon(playerRow, playerCol - 1);
 				checkMonster(playerRow, playerCol - 1);
 				map.maze[playerRow][playerCol - 1] = p;
 				map.maze[playerRow][playerCol] = new Empty();
@@ -196,10 +216,15 @@ public class MazeGame {
 				p.increaseCurrentHealth(t.getHealthRestoration());
 				System.out.println("You've got " + t.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 			}
-			else if (t.toString().equals("S")) {
-				Weapon w = new Weapon("Sword +2", 10000, 0, 10, 15, 10);
+		}
+	}
+	
+	public static void checkWeapon(int row, int col) {
+		if (getType(row, col).equals("Weapon")) {
+			Weapon w = (Weapon)map.maze[row][col];
+			if (w.toString().equals("S")) {
 				p.setBestWeapon(w);
-				System.out.println("You've got " + t.getName() + " weapon! Your current weapon is " + p.getBestWeapon().getName());
+				System.out.println("You've got " + w.getName() + " weapon! Your current weapon is " + p.getBestWeapon().getName());
 			}
 		}
 	}
@@ -208,13 +233,13 @@ public class MazeGame {
 		Random treasureRandom = new Random();
 		int goldRandom = treasureRandom.nextInt(100);
 		if (goldRandom <= m.getHasGoldProbability()) {
-			Treasure gold = map.treasures[2];
+			Treasure gold = map.treasures[1];
 			p.increaseGold(gold.getValue());
 			System.out.println(m.getName() + " dropped some gold! You've got " + gold.getValue() + " gold! You currently have " + p.getGold() + " gold");
 		}
 		int potionRandom = treasureRandom.nextInt(100);
 		if (potionRandom <= m.getHasPotionProbability()) {
-			Treasure potion = map.treasures[1];
+			Treasure potion = map.treasures[0];
 			p.increaseCurrentHealth(potion.getHealthRestoration());
 			System.out.println(m.getName() + " dropped a health potion! You've got " + potion.getHealthRestoration() + " health! Your current health is " + p.getCurrentHealth());
 		}

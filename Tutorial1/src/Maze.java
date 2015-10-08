@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class Maze {
 	
 	public Object[][] maze = new Object[40][40];
-	public int row, col, playerRow, playerCol;
+	public int row, col, playerRow, playerCol, monsterNum, treasureNum, weaponNum;
 	public Monster[] monsters = new Monster[26];
 	public char[] monsterInitials = new char[26];
 	public Treasure[] treasures = new Treasure[26];
 	public char[] treasureInitials = new char[26];
+	public Weapon[] weapons = new Weapon[26];
+	public char[] weaponInitials = new char[26];
 	
 	public Maze(String fileName) {
 		readMonster();
@@ -30,26 +32,31 @@ public class Maze {
 						playerRow = rowCount;
 						playerCol = i;
 					}
-					else if ((str.charAt(i) == monsterInitials[0]) || (str.charAt(i) == monsterInitials[1])) {
-						for (int j = 0; j <= 25; j++) {
-							char c = monsterInitials[j];
-							if (str.charAt(i) == c) {
+					else {
+						for (int j = 0; j < monsterNum; j++) {
+							char cm = monsterInitials[j];
+							if (str.charAt(i) == cm) {
 								Monster m = monsters[j];
 								maze[rowCount][i] = m;
 							}
 						}
-					}
-					else if ((str.charAt(i) == treasureInitials[0]) || (str.charAt(i) == treasureInitials[1]) || (str.charAt(i) == treasureInitials[2])) {
-						for (int k = 0; k <= 25; k++) {
-							char c = treasureInitials[k];
-							if (str.charAt(i) == c) {
+						for (int k = 0; k < treasureNum; k++) {
+							char ct = treasureInitials[k];
+							if (str.charAt(i) == ct) {
 								Treasure t = treasures[k];
 								maze[rowCount][i] = t;
 							}
 						}
+						for (int l = 0; l < weaponNum; l++) {
+							char cw = weaponInitials[l];
+							if (str.charAt(i) == cw) {
+									Weapon w = weapons[l];
+								maze[rowCount][i] = w;
+							}
+						}
+						if (maze[rowCount][i] == null)
+							maze[rowCount][i] = new Empty();
 					}
-					else
-						maze[rowCount][i] = new Empty();
 				}
 				rowCount++;
 			}
@@ -94,6 +101,7 @@ public class Maze {
 				int gold = scan.nextInt();
 				monsters[index] = new Monster(name, health, attack, defense, damage, potion, gold);
 				index++;
+				monsterNum = index;
 				scan.nextLine();
 			}
 			scan.close();
@@ -107,21 +115,32 @@ public class Maze {
 		try {
 			FileReader fin = new FileReader("bin//treasures.txt");
 			Scanner scan = new Scanner(fin);
-			int index = 0;
+			int treasureIndex = 0;
+			int weaponIndex = 0;
 			while (scan.hasNext()) {
 				String type = scan.nextLine();
 				String name = scan.nextLine();
-				char initial = name.charAt(0);
-				treasureInitials[index] = initial;
 				int value = scan.nextInt();
 				int healthRestoration = scan.nextInt();
 				int attackBonus = scan.nextInt();
 				int damageBonus = scan.nextInt();
 				int probability = scan.nextInt();
-				treasures[index] = new Treasure(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
-				index++;
+				if (type.equals("Weapon")) {
+					weapons[weaponIndex] = new Weapon(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
+					char initial = name.charAt(0);
+					weaponInitials[weaponIndex] = initial;
+					weaponIndex++;
+				}
+				else {
+					treasures[treasureIndex] = new Treasure(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
+					char initial = name.charAt(0);
+					treasureInitials[treasureIndex] = initial;
+					treasureIndex++;
+				}
 				scan.nextLine();
 			}
+			treasureNum = treasureIndex + 1;
+			weaponNum = weaponIndex + 1;
 			scan.close();
 		}
 		catch (FileNotFoundException e) {
@@ -165,6 +184,12 @@ public class Maze {
 				}
 				else if (maze[i][j].getClass().getName().equals("Treasure")) {
 					if (((Treasure)maze[i][j]).isVisible())
+						System.out.print(maze[i][j]);
+					else
+						System.out.print(" ");
+				}
+				else if (maze[i][j].getClass().getName().equals("Weapon")) {
+					if (((Weapon)maze[i][j]).isVisible())
 						System.out.print(maze[i][j]);
 					else
 						System.out.print(" ");
