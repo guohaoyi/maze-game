@@ -1,10 +1,9 @@
 
 public class Monster extends Character {
 	
-	protected String name;
+	private String name;
 	private int hasPotionProbability;
 	private int hasGoldProbability;
-	protected boolean visible;
 	
 	public Monster(String name, int startHealth, int startAttack, int startDefense, int startDamage, int potion, int gold) {
 		super(startHealth, startAttack, startDefense, startDamage);
@@ -32,14 +31,6 @@ public class Monster extends Character {
 
 	public void setHasGoldProbability(int hasGoldProbability) {
 		this.hasGoldProbability = hasGoldProbability;
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean newVisible) {
-		visible = newVisible;
 	}
 
 	public String toString() {

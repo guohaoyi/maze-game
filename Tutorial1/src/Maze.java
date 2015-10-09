@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Maze {
 	
 	public Object[][] maze = new Object[40][40];
-	public int row, col, playerRow, playerCol, monsterNum, treasureNum, weaponNum;
+	public int row, col, playerRow, playerCol, exitRow, exitCol, monsterNum, treasureNum, weaponNum;
 	public Monster[] monsters = new Monster[26];
 	public char[] monsterInitials = new char[26];
 	public Treasure[] treasures = new Treasure[26];
@@ -31,6 +31,11 @@ public class Maze {
 						readPlayer(rowCount, i);
 						playerRow = rowCount;
 						playerCol = i;
+					}
+					else if (str.charAt(i) == 'E') {
+						exitRow = rowCount;
+						exitCol = i;
+						maze[rowCount][i] = new Empty();
 					}
 					else {
 						for (int j = 0; j < monsterNum; j++) {

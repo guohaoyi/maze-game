@@ -244,7 +244,7 @@ public class MazeGame {
 	}
 	
 	public static void checkGame() {
-		if ((map.maze[exitRow][exitCol].equals(p)) || (p.getCurrentHealth() <= 0))
+		if ((map.maze[map.exitRow][map.exitCol].equals(p)) || (p.getCurrentHealth() <= 0))
 			game = true;
 	}
 	
@@ -259,8 +259,6 @@ public class MazeGame {
 	
 	public static void main(String[] args) {
 		map = new Maze("map01.txt");
-		exitRow = 1;
-		exitCol = 0;
 		playerRow = map.playerRow;
 		playerCol = map.playerCol;
 		p = (Player)map.maze[playerRow][playerCol];

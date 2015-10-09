@@ -5,6 +5,7 @@ public class Character {
 	protected int attack;
 	protected int defense;
 	protected int damage;
+	protected boolean visible;
 	
 	public Character(int startHealth, int startAttack, int startDefense, int startDamage) {
 		setHealth(startHealth);
@@ -45,10 +46,17 @@ public class Character {
 		this.damage = damage;
 	}
 
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Character c = new Character(100,5,2,0);
-		System.out.println(c);
+
 	}
 
 }

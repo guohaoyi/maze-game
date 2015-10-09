@@ -4,18 +4,13 @@ public class Player extends Character {
 	protected int currentHealth;
 	protected int gold;
 	protected Weapon bestWeapon;
-	protected boolean visible;
 	
 	public Player(int startHealth, int startAttack, int startDefense, int startDamage) {
 		super(startHealth, startAttack, startDefense, startDamage);
 		setCurrentHealth(startHealth);
 		setGold(0);
 		setBestWeapon(null);
-		visible = true;
-	}
-	
-	public boolean isVisible() {
-		return visible;
+		setVisible(true);
 	}
 
 	public int getCurrentHealth() {
