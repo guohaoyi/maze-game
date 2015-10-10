@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,32 +12,32 @@ public class MazeGenerator {
 	public char[] treasureInitials = new char[26];
 	public char[] weaponInitials = new char[26];
 	
-	public MazeGenerator() {
+	public MazeGenerator() throws IOException {
 		readMonster();
 		readTreasure();
-		char[][] maze = generate();
-		floodFill(maze);
-		/*
+		//char[][] maze = generate();
+		//floodFill(maze);
+		String[] fileNames = {"bin//map01.txt", "bin//map02.txt", "bin//map03.txt"};
 		for (int mazeNum = 0; mazeNum < 3; mazeNum++) {
 			char[][] maze = generate();
 			while (floodFill(maze) != true)
 				maze = generate();
-			FileWriter fout = new FileWriter("bin//map01.txt");
+			for (int i = 0; i < 40; i++) {
+				for (int j = 0; j < 40; j++) {
+					System.out.print(maze[i][j]);
+				}
+				System.out.println();
+			}
+			FileWriter fout = new FileWriter(fileNames[mazeNum]);
 			char[] cbuf = new char[40];
 			for (int i = 0; i < 40; i++) {
 				for (int j = 0; j < 40; j++) {
 					cbuf[j] = maze[i][j];
 				}
 				fout.write(cbuf);
+				fout.write("\n");
 			}
 			fout.close();
-		}
-		*/
-		for (int i = 0; i < 40; i++) {
-			for (int j = 0; j < 40; j++) {
-				System.out.print(maze[i][j]);
-			}
-			System.out.println();
 		}
 	}
 	
@@ -48,7 +49,7 @@ public class MazeGenerator {
 			}
 		}
 		Random ran = new Random();
-		for (int o = 0; o < 1000; o++)
+		for (int o = 0; o < 1400; o++)
 			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = ' ';
 		maze[1][1] = 'U';
 		maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = 'E';
@@ -71,25 +72,36 @@ public class MazeGenerator {
 				char c = maze[i][j];
 				if (c != 'W') {
 					mark[i][j] = true;
-					if (maze[i+1][j] != 'W')
+					int times = 4;
+					if (maze[i+1][j] != 'W') {
 						mark[i+1][j] = true;
-					if (maze[i-1][j] != 'W')
+						times--;
+					}
+					if (maze[i-1][j] != 'W') {
 						mark[i+1][j] = true;
-					if (maze[i][j+1] != 'W')
-						mark[i][j+1] = true;
-					if (maze[i][j-1] != 'W')
+						times--;
+					}
+					if (maze[i][j+1] != 'W') {
+						mark[i+1][j] = true;
+						times--;
+					}
+					if (maze[i][j-1] != 'W') {
 						mark[i][j-1] = true;
+						times--;
+					}
+					if (times == 4) {
+						break;
+					}
 				}
 				if (c == 'E') {
 					exitRow = i;
 					exitCol = j;
 				}
-				System.out.println(i + " " + j + " " + mark[i][j]);
 			}
 		}
 		if ((mark[1][1] == true) && (mark[exitRow][exitCol] == true))
 			path = true;
-		System.out.println(path);
+		//System.out.println(path);
 		return path;
 	}
 	
@@ -157,7 +169,7 @@ public class MazeGenerator {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		MazeGenerator m = new MazeGenerator();
 

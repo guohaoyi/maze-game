@@ -201,8 +201,12 @@ public class Maze {
 				}
 			}
 			System.out.print("  |  ");
-			for (int k = 0; k < col; k++)
-				System.out.print(maze[i][k]);
+			for (int k = 0; k < col; k++) {
+				if ((i == exitRow) && (k == exitCol))
+					System.out.print("E");
+				else
+					System.out.print(maze[i][k]);
+			}
 			System.out.println();
 		}
 	}
