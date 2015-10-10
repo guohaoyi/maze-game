@@ -114,13 +114,12 @@ public class MazeGenerator {
 				String name = scan.nextLine();
 				char initial = name.charAt(0);
 				monsterInitials[index] = initial;
-				int health = scan.nextInt();
-				int attack = scan.nextInt();
-				int defense = scan.nextInt();
-				int damage = scan.nextInt();
-				int potion = scan.nextInt();
-				int gold = scan.nextInt();
-				Monster m = new Monster(name, health, attack, defense, damage, potion, gold);
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
 				index++;
 				monsterNum = index;
 				scan.nextLine();
@@ -141,19 +140,17 @@ public class MazeGenerator {
 			while (scan.hasNext()) {
 				String type = scan.nextLine();
 				String name = scan.nextLine();
-				int value = scan.nextInt();
-				int healthRestoration = scan.nextInt();
-				int attackBonus = scan.nextInt();
-				int damageBonus = scan.nextInt();
-				int probability = scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
+				scan.nextInt();
 				if (type.equals("Weapon")) {
-					Weapon w = new Weapon(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
 					char initial = name.charAt(0);
 					weaponInitials[weaponIndex] = initial;
 					weaponIndex++;
 				}
 				else {
-					Treasure t = new Treasure(type, name, value, healthRestoration, attackBonus, damageBonus, probability);
 					char initial = name.charAt(0);
 					treasureInitials[treasureIndex] = initial;
 					treasureIndex++;
@@ -171,7 +168,7 @@ public class MazeGenerator {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		MazeGenerator m = new MazeGenerator();
+		new MazeGenerator();
 
 	}
 
