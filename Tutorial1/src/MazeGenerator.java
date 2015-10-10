@@ -15,12 +15,10 @@ public class MazeGenerator {
 	public MazeGenerator() throws IOException {
 		readMonster();
 		readTreasure();
-		//char[][] maze = generate();
-		//floodFill(maze);
 		String[] fileNames = {"bin//map01.txt", "bin//map02.txt", "bin//map03.txt"};
 		for (int mazeNum = 0; mazeNum < 3; mazeNum++) {
 			char[][] maze = generate();
-			while (floodFill(maze) != true)
+			while (!floodFill(maze))
 				maze = generate();
 			for (int i = 0; i < 40; i++) {
 				for (int j = 0; j < 40; j++) {
@@ -72,7 +70,17 @@ public class MazeGenerator {
 				char c = maze[i][j];
 				if (c != 'W') {
 					mark[i][j] = true;
-					int times = 4;
+					if (maze[i-1][j] != 'W')
+						path = true;
+					if (maze[i+1][j] != 'W')
+						path = true;
+					if (maze[i][j+1] != 'W')
+						path = true;
+					if (maze[i][j-1] != 'W')
+						path = true;
+					if (!path)
+						break;
+					/*int times = 4;
 					if (maze[i+1][j] != 'W') {
 						mark[i+1][j] = true;
 						times--;
@@ -91,7 +99,7 @@ public class MazeGenerator {
 					}
 					if (times == 4) {
 						break;
-					}
+					}*/
 				}
 				if (c == 'E') {
 					exitRow = i;
@@ -104,6 +112,12 @@ public class MazeGenerator {
 		//System.out.println(path);
 		return path;
 	}
+	
+	/*public boolean floodFill2(char[][] maze) {
+		boolean path = false;
+		Queue<Character> queue = new LinkedList<Character>;
+		return path;
+	}*/
 	
 	public void readMonster() {
 		try {
