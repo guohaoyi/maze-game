@@ -274,6 +274,8 @@ public class MazeGame {
 				map.printSideBySide();
 				checkGame();
 			}
+			if (p.getCurrentHealth() <= 0)
+				break;
 			game = false;
 		}
 		System.out.println("Game!");
