@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -161,7 +162,6 @@ public class MazeGame {
 		int monsterDamage = m.getDamage();
 		int monsterDefense = m.getDefense();
 		int monsterHealth = m.getHealth();
-		//boolean monsterDies = false;
 		while ((playerHealth > 0) && (monsterHealth > 0)) {
 			int pAttack = playerRandom.nextInt(playerAttack);
 			int mDefense = monsterRandom.nextInt(monsterDefense);
@@ -170,7 +170,6 @@ public class MazeGame {
 				monsterHealth = monsterHealth - actualPlayerDamage;
 				System.out.println("You hit " + m.getName() + " for " + actualPlayerDamage + " damage!");
 				if (monsterHealth <= 0) {
-					//monsterDies = true;
 					System.out.println(m.getName() + " died!");
 					dropTreasure(m);
 					break;
@@ -257,7 +256,8 @@ public class MazeGame {
 		System.out.println("\n\n\n\n\n\n\n\n\n");
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		new MazeGenerator();
 		System.out.println("You wake up in a cold, damp, dark area. You're lying on the ground in a pool of blood\nand vomit. It appears to be your own. Wow! What a wild night last night was. You\nremember so little, but your head pounds and you wish you were home in bed (or even\nin Dave's CSC 300 class - anywhere but here). Oh well. You stagger to your feet and\nbump up against a slimy wall. Ewwwwww! Well, time to get out of here. You notice\nyour pockets are empty. Even your trusty dagger is gone. This so sucks. Well, you're\nnot getting home by standing here... Get moving!");
 		String[] fileNames = {"map01.txt", "map02.txt", "map03.txt"};
 		for (int games = 0; games < 3; games++) {

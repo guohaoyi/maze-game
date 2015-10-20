@@ -20,12 +20,6 @@ public class MazeGenerator {
 			char[][] maze = generate();
 			while (!floodFill(maze))
 				maze = generate();
-			for (int i = 0; i < 40; i++) {
-				for (int j = 0; j < 40; j++) {
-					System.out.print(maze[i][j]);
-				}
-				System.out.println();
-			}
 			FileWriter fout = new FileWriter(fileNames[mazeNum]);
 			char[] cbuf = new char[40];
 			for (int i = 0; i < 40; i++) {
@@ -47,16 +41,16 @@ public class MazeGenerator {
 			}
 		}
 		Random ran = new Random();
-		for (int o = 0; o < 1400; o++)
+		for (int k = 0; k < 1600; k++)
 			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = ' ';
 		maze[1][1] = 'U';
 		maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = 'E';
-		for (int m = 0; m < monsterNum; m++)
-			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = monsterInitials[m];
-		for (int n = 0; n < treasureNum; n++)
-			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = treasureInitials[n];
-		for (int o = 0; o < weaponNum; o++)
-			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = weaponInitials[o];
+		for (int l = 0; l < monsterNum; l++)
+			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = monsterInitials[l];
+		for (int m = 0; m < treasureNum; m++)
+			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = treasureInitials[m];
+		for (int n = 0; n < weaponNum; n++)
+			maze[ran.nextInt(38) + 1][ran.nextInt(38) + 1] = weaponInitials[n];
 		return maze;
 	}
 	
@@ -71,35 +65,13 @@ public class MazeGenerator {
 				if (c != 'W') {
 					mark[i][j] = true;
 					if (maze[i-1][j] != 'W')
-						path = true;
+						mark[i-1][j] = true;
 					if (maze[i+1][j] != 'W')
-						path = true;
+						mark[i+1][j] = true;
 					if (maze[i][j+1] != 'W')
-						path = true;
+						mark[i][j+1] = true;
 					if (maze[i][j-1] != 'W')
-						path = true;
-					if (!path)
-						break;
-					/*int times = 4;
-					if (maze[i+1][j] != 'W') {
-						mark[i+1][j] = true;
-						times--;
-					}
-					if (maze[i-1][j] != 'W') {
-						mark[i+1][j] = true;
-						times--;
-					}
-					if (maze[i][j+1] != 'W') {
-						mark[i+1][j] = true;
-						times--;
-					}
-					if (maze[i][j-1] != 'W') {
 						mark[i][j-1] = true;
-						times--;
-					}
-					if (times == 4) {
-						break;
-					}*/
 				}
 				if (c == 'E') {
 					exitRow = i;
@@ -109,15 +81,20 @@ public class MazeGenerator {
 		}
 		if ((mark[1][1] == true) && (mark[exitRow][exitCol] == true))
 			path = true;
-		//System.out.println(path);
+		
+		for (int i = 1; i < 39; i++) {
+			for (int j = 1; j < 39; j++) {
+				if((mark[i-1][j]) || (mark[i+1][j]) || (mark[i][j+1]) || (mark[i][j-1]))
+					path = true;
+				else {
+					path = false;
+					break;
+				}
+			}
+		}
+
 		return path;
 	}
-	
-	/*public boolean floodFill2(char[][] maze) {
-		boolean path = false;
-		Queue<Character> queue = new LinkedList<Character>;
-		return path;
-	}*/
 	
 	public void readMonster() {
 		try {

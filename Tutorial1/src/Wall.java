@@ -11,8 +11,8 @@ public class Wall {
 		return visible;
 	}
 
-	public void setVisible(boolean newVisible) {
-		visible = newVisible;
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 	public String toString() {

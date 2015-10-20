@@ -9,7 +9,6 @@ public class Treasure {
 	protected int damageBonus;
 	protected int probability;
 	protected boolean visible;
-	//protected boolean pickedUp;
 	
 	public Treasure(String type, String name, int value, int healthRestoration, int attackBonus, int damageBonus, int probability) {
 		this.setType(type);
@@ -77,15 +76,7 @@ public class Treasure {
 	public void setProbability(int probability) {
 		this.probability = probability;
 	}
-/*
-	public boolean isPickedUp() {
-		return pickedUp;
-	}
 
-	public void setPickedUp(boolean pickedUp) {
-		this.pickedUp = pickedUp;
-	}
-*/	
 	public boolean isVisible() {
 		return visible;
 	}
