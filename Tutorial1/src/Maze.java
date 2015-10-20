@@ -166,7 +166,9 @@ public class Maze {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (maze[i][j].getClass().getName().equals("Empty")) {
-					if (((Empty)maze[i][j]).isVisible())
+					if ((i == exitRow) && (j == exitCol))
+						System.out.print("E");
+					else if (((Empty)maze[i][j]).isVisible())
 						System.out.print(maze[i][j]);
 				}
 				else if (maze[i][j].getClass().getName().equals("Wall")) {
